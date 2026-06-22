@@ -1,0 +1,64 @@
+
+cndia@cndiaye MINGW64 /c/cours-pratique-dbt/formation_dbt (main)
+$ duckdb --version
+v1.5.4 (Variegata) 08e34c447b
+
+cndia@cndiaye MINGW64 /c/cours-pratique-dbt/formation_dbt (main)
+$ source .venv/Scripts/activate
+.venv/Scripts/dbt.exe --version
+bash: .venv/Scripts/activate: No such file or directory
+bash: .venv/Scripts/dbt.exe: No such file or directory
+
+cndia@cndiaye MINGW64 /c/cours-pratique-dbt/formation_dbt (main)
+$ cd ..
+
+cndia@cndiaye MINGW64 /c/cours-pratique-dbt (main)
+$ source .venv/Scripts/activate
+(.venv) 
+cndia@cndiaye MINGW64 /c/cours-pratique-dbt (main)
+$ .venv/Scripts/dbt.exe --version
+Core:
+  - installed: 1.11.11
+  - latest:    1.11.11 - Up to date!
+
+Plugins:
+  - duckdb:   1.10.1 - Up to date!
+  - postgres: 1.10.1 - Up to date!
+
+
+(.venv) 
+cndia@cndiaye MINGW64 /c/cours-pratique-dbt (main)
+$ /c/tools/duckdb/duckdb.exe
+DuckDB v1.5.4 (Variegata)
+Enter ".help" for usage hints.
+memory D SELECT count(*) from https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet;
+Parser Error:
+syntax error at or near "//"
+
+LINE 1: SELECT count(*) from https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024...
+                                   ^
+memory D SELECT count(*) from 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet';
+┌────────────────┐
+│  count_star()  │
+│     int64      │
+├────────────────┤
+│    2964624     │
+│ (2.96 million) │
+└────────────────┘
+memory D SELECT VendorId,count(*) from 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet'GROUP BY VendirId;
+Binder Error:
+Referenced column "VendirId" not found in FROM clause!
+Candidate bindings: "VendorID", "tpep_dropoff_datetime", "RatecodeID", "extra", "passenger_count"
+
+LINE 1: ....net/trip-data/yellow_tripdata_2024-01.parquet'GROUP BY VendirId;
+                                                                   ^
+memory D SELECT VendorId,count(*) from 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet'GROUP BY VendorId;
+┌──────────┬──────────────┐
+│ VendorID │ count_star() │
+│  int32   │    int64     │
+├──────────┼──────────────┤
+│        6 │          260 │
+│        1 │       729732 │
+│        2 │      2234632 │
+└──────────┴──────────────┘
+memory D 

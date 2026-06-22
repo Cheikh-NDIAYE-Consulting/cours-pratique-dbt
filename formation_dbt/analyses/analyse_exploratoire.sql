@@ -1,0 +1,1 @@
+SELECT  VendorId,count(*) from 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-11.parquet' GROUP BY VendorId;
